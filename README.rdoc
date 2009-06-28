@@ -55,27 +55,27 @@ This is only prototype.
 === View
 ==== new.html.haml
 
-= error_messages_for( :post )
-= render( :partial => "step_#{@post.current_stage}" )
+  = error_messages_for( :post )
+  = render( :partial => "step_#{@post.current_stage}" )
 
 ==== step_1.html.haml
 
-- form_for( @post ) do |f|
-  = f.hidden_field( :current_stage, :value => @step_id )
-  %ul
-    %li
-      = f.label( :name_1 )
-      = f.text_field( :name_1 )
-    %li
-      = f.submit( 'dalej' )
+  - form_for( @post ) do |f|
+    = f.hidden_field( :current_stage, :value => @step_id )
+    %ul
+      %li
+        = f.label( :name_1 )
+        = f.text_field( :name_1 )
+      %li
+        = f.submit( 'dalej' )
 
 ==== step_2.html.haml
 
-- form_for( @post ) do |f|
-  = f.hidden_field( :current_stage, :value => @step_id )
-  %ul
-    %li
-      = f.label( :name_2 )
-      = f.text_field( :name_2 )
-    %li
-      = f.submit( 'dalej' )
+  - form_for( @post ) do |f|
+    = f.hidden_field( :current_stage, :value => @step_id )
+    %ul
+      %li
+        = f.label( :name_2 )
+        = f.text_field( :name_2 )
+      %li
+        = f.submit( 'dalej' )
