@@ -1,0 +1,81 @@
+= MultiStageForm
+
+Plugin for creating multi stage form
+
+This is only prototype.
+
+== Usage
+
+=== Model
+
+  class Post < ActiveRecord::Base
+    attr_accessor( :current_stage )
+
+    multi_stage_form(
+      :validates_on_stage => {
+        1 => [:name_1],
+        2 => [:name_2]
+      },
+      :stages => 4
+    )
+  end      
+
+=== Controller
+
+  class PostsController < ApplicationController
+
+    def index
+    end
+
+    def new
+      @step_id = ( params[:current_stage] || 1 ).to_i
+      Post.session = session
+      if( @step_id == 1 )
+        Post.clear_session
+      end
+      @post = Post.get_partial_data_from_session
+      @post.current_stage = @step_id
+    end
+
+    def create
+      Post.session = session
+      @post = Post.partial_create( params[:post] )
+      @post.current_stage = params[:post][:current_stage]
+      multi_stage_form( @post )
+    end
+
+    protected
+
+    def stage_2
+      #do something on stage 2
+    end
+
+  end
+ 
+=== View
+==== new.html.haml
+
+= error_messages_for( :post )
+= render( :partial => "step_#{@post.current_stage}" )
+
+==== step_1.html.haml
+
+- form_for( @post ) do |f|
+  = f.hidden_field( :current_stage, :value => @step_id )
+  %ul
+    %li
+      = f.label( :name_1 )
+      = f.text_field( :name_1 )
+    %li
+      = f.submit( 'dalej' )
+
+==== step_2.html.haml
+
+- form_for( @post ) do |f|
+  = f.hidden_field( :current_stage, :value => @step_id )
+  %ul
+    %li
+      = f.label( :name_2 )
+      = f.text_field( :name_2 )
+    %li
+      = f.submit( 'dalej' )
