@@ -4,6 +4,12 @@ Plugin for creating multi stage form
 
 This is only prototype.
 
+== TODO
+  * improve documentation
+  * make tests
+  * minimize code in controller
+  * more options for plugin
+
 == Usage
 
 === Model
@@ -16,7 +22,7 @@ This is only prototype.
         1 => [:name_1],
         2 => [:name_2]
       },
-      :stages => 4
+      :stages => 2
     )
   end      
 
@@ -58,7 +64,7 @@ This is only prototype.
   = error_messages_for( :post )
   = render( :partial => "step_#{@post.current_stage}" )
 
-==== step_1.html.haml
+==== _step_1.html.haml
 
   - form_for( @post ) do |f|
     = f.hidden_field( :current_stage, :value => @step_id )
@@ -69,7 +75,7 @@ This is only prototype.
       %li
         = f.submit( 'dalej' )
 
-==== step_2.html.haml
+==== _step_2.html.haml
 
   - form_for( @post ) do |f|
     = f.hidden_field( :current_stage, :value => @step_id )
@@ -79,3 +85,5 @@ This is only prototype.
         = f.text_field( :name_2 )
       %li
         = f.submit( 'dalej' )
+
+Copyright (c) 2009 Artur Małecki
