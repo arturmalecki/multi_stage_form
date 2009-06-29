@@ -8,7 +8,6 @@ This is only prototype.
   * improve documentation
   * make tests
   * minimize code in controller
-  * more options for plugin
 
 == Usage
 
