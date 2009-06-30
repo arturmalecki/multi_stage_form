@@ -72,7 +72,7 @@ This is only prototype.
         = f.label( :name_1 )
         = f.text_field( :name_1 )
       %li
-        = f.submit( 'dalej' )
+        = f.submit( 'next' )
 
 ==== _step_2.html.haml
 
@@ -83,6 +83,6 @@ This is only prototype.
         = f.label( :name_2 )
         = f.text_field( :name_2 )
       %li
-        = f.submit( 'dalej' )
+        = f.submit( 'create' )
 
 Copyright (c) 2009 Artur Małecki
