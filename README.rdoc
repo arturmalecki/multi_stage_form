@@ -33,20 +33,12 @@ This is only prototype.
     end
 
     def new
-      @step_id = ( params[:current_stage] || 1 ).to_i
-      Post.session = session
-      if( @step_id == 1 )
-        Post.clear_session
-      end
-      @post = Post.get_partial_data_from_session
-      @post.current_stage = @step_id
+      @post = msf_new(params[:current_stage])
     end
 
     def create
-      Post.session = session
-      @post = Post.partial_create( params[:post] )
-      @post.current_stage = params[:post][:current_stage]
-      multi_stage_form( @post )
+      @post = msf_create(params[:post])
+      multi_stage_form(@post)
     end
 
     protected
